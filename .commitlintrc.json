@@ -1,0 +1,22 @@
+{
+  "extends": ["@commitlint/config-conventional"],
+  "rules": {
+    "type-enum": [
+      2,
+      "always",
+      [
+        "feat",
+        "fix",
+        "style",
+        "refector",
+        "file",
+        "design",
+        "comment",
+        "chore",
+        "docs",
+        "hotfix"
+      ]
+    ],
+    "body-leading-blank": [2, "always"]
+  }
+}

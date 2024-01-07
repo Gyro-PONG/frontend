@@ -1,51 +1,89 @@
 {
+  "root": true,
   "env": {
     "browser": true,
-    "es2021": true,
-    "jest": true,
+    "es2020": true,
     "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   },
   "extends": [
     "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended",
-    "plugin:import/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended",
+    "plugin:jest-dom/recommended",
+    "plugin:testing-library/react",
+    "prettier"
   ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
-  "plugins": ["react"],
+  "plugins": [
+    "react",
+    "react-refresh",
+    "import",
+    "testing-library",
+    "@typescript-eslint"
+  ],
+  "ignorePatterns": ["node_modules/**/*", "build/**/*", "coverage/**/*"],
+  "parser": "@typescript-eslint/parser",
   "rules": {
-    "no-var": ["error"],
-    "no-unused-vars": ["warn"],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
-    "semi": ["error", "always"],
-    "react/react-in-jsx-scope": ["off"],
+    "react-refresh/only-export-components": [
+      "warn",
+      { "allowConstantExport": true }
+    ],
     "import/order": [
       "error",
       {
-        "groups": ["builtin", "external", "internal", "parent", "sibling"],
+        "newlines-between": "always",
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "index",
+          "sibling",
+          "parent",
+          "type"
+        ],
         "pathGroups": [
           {
-            "pattern": "react",
-            "group": "external",
+            "pattern": "react**",
+            "group": "builtin",
             "position": "before"
+          },
+          {
+            "pattern": "src/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "@pages/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@components/**",
+            "group": "internal",
+            "position": "after"
           }
         ],
-        "pathGroupsExcludedImportTypes": ["react"],
-        "newlines-between": "always",
+        "pathGroupsExcludedImportTypes": ["react", "react-router-dom"],
         "alphabetize": {
           "order": "asc",
           "caseInsensitive": true
-        },
-        "warnOnUnassignedImports": true
+        }
       }
-    ]
+    ],
+    "testing-library/no-node-access": "off",
+    "react/no-unknown-property": ["error", { "ignore": ["css"] }]
   }
 }
